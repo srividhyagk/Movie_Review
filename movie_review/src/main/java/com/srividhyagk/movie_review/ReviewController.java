@@ -25,8 +25,8 @@ public class ReviewController {
 
 	
 	  @PostMapping(path="/add") 
-	  public @ResponseBody Reviews addNewReview( @RequestParam int movie_id,@RequestParam int user_id,
-			  @RequestParam String comment,@RequestParam int rating)
+	  public @ResponseBody String addNewReview( @RequestParam(name="movieid") int movie_id,@RequestParam(name="userid") int user_id,
+			  @RequestParam(name="comment") String comment,@RequestParam(name="rating") int rating)
 	  { 
 		Reviews r=new Reviews();
 	 r.setMovie_id(movie_id);
@@ -34,7 +34,7 @@ public class ReviewController {
 	 r.setComment(comment);
 	 r.setRating(rating);
 	 reviewrepo.save(r); 
-	 return r;
+	 return "Saved";
 	 
 	 }
 	 

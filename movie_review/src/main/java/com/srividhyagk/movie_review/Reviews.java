@@ -16,16 +16,12 @@ public class Reviews {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	
-	@Column(name="movie_id")
-	private int movie_id;
-	
-	
-	@Column(name="user_id")
-	private int user_id;
-	
 	private String comment;
 	private int rating;
+	
+	private int movie_id;	
+	private int user_id;	
+	
 
 	@ManyToOne
 	@JoinColumn(name = "movie_id",referencedColumnName="id", insertable = false, updatable = false)
@@ -37,9 +33,8 @@ public class Reviews {
 	private User user;
 
 public Reviews(){}
-	public Reviews(int id, int movie_id, int user_id, String comment, int rating, Movie movie, User user) {
+	public Reviews(int movie_id, int user_id, String comment, int rating, Movie movie, User user) {
 		super();
-		this.id = id;
 		this.movie_id = movie_id;
 		this.user_id = user_id;
 		this.comment = comment;
