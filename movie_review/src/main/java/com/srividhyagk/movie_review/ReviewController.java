@@ -1,5 +1,7 @@
 package com.srividhyagk.movie_review;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,23 +23,21 @@ public class ReviewController {
 	private MovieRepository movierepo;
 	@Autowired
 	private UserRepository userrepo;
-	
 
-	
-	  @PostMapping(path="/add") 
-	  public @ResponseBody String addNewReview( @RequestParam(name="movieid") int movie_id,@RequestParam(name="userid") int user_id,
-			  @RequestParam(name="comment") String comment,@RequestParam(name="rating") int rating)
-	  { 
-		Reviews r=new Reviews();
-	 r.setMovie_id(movie_id);
-	 r.setUser_id(user_id); 
-	 r.setComment(comment);
-	 r.setRating(rating);
-	 reviewrepo.save(r); 
-	 return "Saved";
-	 
-	 }
-	 
+	@PostMapping(path = "/add")
+	public @ResponseBody String addNewReview(@RequestParam(name = "movieid") int movie_id,
+			@RequestParam(name = "userid") int user_id, @RequestParam(name = "comment") String comment,
+			@RequestParam(name = "rating") int rating) {
+		Reviews r = new Reviews();
+		r.setMovie_id(movie_id);
+		r.setUser_id(user_id);
+		r.setComment(comment);
+		r.setRating(rating);
+		reviewrepo.save(r);
+		return "Saved Review";
+
+	}
+
 	@GetMapping(path = "/all")
 	public @ResponseBody Iterable<Reviews> getAllReviews() {
 		return reviewrepo.findAll();
@@ -45,17 +45,28 @@ public class ReviewController {
 
 	@GetMapping(path = "/getReview")
 	public @ResponseBody List<Reviews> getReviewByUsername(String username) {
-		User u=userrepo.findByUsername(username);
+		User u = userrepo.findByUsername(username);
 		return reviewrepo.findByUser_id(u.getId());
 	}
-	
+
 	@GetMapping(path = "/getReviewByMovieTitle")
 	public @ResponseBody List<Reviews> getReviewByTitle(String title) {
-		Movie m=movierepo.findByTitle(title);
+		Movie m = movierepo.findByTitle(title);
 		return reviewrepo.findByMovie_id(m.getId());
-	
+
+	}
+
+	@GetMapping(path = "/getReviewByRating")
+	public @ResponseBody List<Reviews> getReviewByRating(int rating) {
+		return reviewrepo.findByRating(rating);
+
+	}
+
+	@GetMapping(path = "/getReviewByCategory")
+	public @ResponseBody List<Movie> getReviewByCategory(String category) {
+		List<Movie> ml = movierepo.findByCategory(category);
+		return ml;
+
+	}
+
 }
-}
-
-
-
