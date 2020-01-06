@@ -32,13 +32,15 @@ public class Reviews {
 	@JoinColumn(name = "user_id",referencedColumnName="id",insertable = false, updatable = false)
 	private User user;
 
-public Reviews(){}
-	public Reviews(int movie_id, int user_id, String comment, int rating, Movie movie, User user) {
+	public Reviews() {}
+	public Reviews(int id, String comment, int rating, int movie_id, int user_id, Movie movie,
+			User user) {
 		super();
-		this.movie_id = movie_id;
-		this.user_id = user_id;
+		this.id = id;
 		this.comment = comment;
 		this.rating = rating;
+		this.movie_id = movie_id;
+		this.user_id = user_id;
 		this.movie = movie;
 		this.user = user;
 	}
@@ -86,9 +88,10 @@ public Reviews(){}
 	}
 	@Override
 	public String toString() {
-		return "Reviews [id=" + id + ", movie_id=" + movie_id + ", user_id=" + user_id + ", comment=" + comment
-				+ ", rating=" + rating + ", movie=" + movie + ", user=" + user + "]";
+		return "Reviews [id=" + id + ", comment=" + comment + ", rating=" + rating + ", movie_id=" + movie_id
+				+ ", user_id=" + user_id + ", movie=" + movie +  ", user=" + user + "]";
 	}
+	
 	
 
 

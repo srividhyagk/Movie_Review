@@ -13,15 +13,14 @@ public class Movie {
 	private int id;
 
 	private String title;
-	private String Category;
+	private String category;
 
 	// constructors
 	protected Movie() {}
-	public Movie(int id, String title, String category) {
+	public Movie(String title, String category) {
 		super();
-		this.id = id;
 		this.title = title;
-		Category = category;
+		this.category = category;
 	}
 
 	public int getId() {
@@ -41,16 +40,16 @@ public class Movie {
 	}
 
 	public String getCategory() {
-		return Category;
+		return category;
 	}
 
 	public void setCategory(String category) {
-		Category = category;
+		this.category = category;
 	}
 
 	@Override
 	public String toString() {
-		return "Movie [id=" + id + ", title=" + title + ", Category=" + Category + "]";
+		return "Movie [id=" + id + ", title=" + title + ", Category=" + category + "]";
 	}
 
 }
